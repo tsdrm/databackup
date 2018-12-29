@@ -29,14 +29,12 @@ class Config:
             if line.find('=') == -1:
                 continue
 
-
             # Put configuration information in form key-value into filed 'info'.
             line_contents = line.split("=")
             if len(line_contents) == 1:
                 self.info[line_contents[0]] = ""
             if len(line_contents) == 2:
                 self.info[line_contents[0]] = line_contents[1]
-
 
     def read_file(self, path):
         """
@@ -68,4 +66,3 @@ def new_config(path):
     config = Config(path)
     config.parse()
     return config
-
