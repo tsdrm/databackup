@@ -27,7 +27,7 @@ class Mysql(base.Base):
 
     # db = None
 
-    def __init__(self, addr, port, username, password, db_name, extra_file, path):
+    def __init__(self, addr, port, username, password, db_name, extra_file, path, folder, export_name):
         base.Base.__init__(self)
         self.addr = addr
         self.port = port
@@ -36,6 +36,10 @@ class Mysql(base.Base):
         self.db_name = db_name
         self.extra_file = extra_file
         self.path = path
+        self.folder = folder
+        self.export_name = export_name
+        if export_name == "":
+            self.export_name = datetime.now().strftime("%Y-%m-%d-%H-%M-%S") + ".sql"
 
     # def connect_database(self):
     #     """
@@ -79,7 +83,7 @@ class Mysql(base.Base):
         :return: str. It represents a file path if export execute successfully
         """
 
-        name = os.path.join(datetime.now().strftime("%Y-%m-%d-%H-%M-%S") + ".sql")
+        name = os.path.join(self.folder, self.export_name)
         command = "mysqldump -u {} -p {} --host={} --port={} -B {} > {}".format(
             self.username, self.password, self.addr, self.port, self.db_name, name)
         logging.info(
@@ -97,7 +101,7 @@ class Mysql(base.Base):
                                                                                               self.db_name, self.port))
 
     def exec(self):
-        name = os.path.join(datetime.now().strftime("%Y-%m-%d-%H-%M-%S") + ".sql")
+        name = os.path.join(self.folder, self.export_name)
         command = "mysqldump --default-extra-file={} {} > {}".format(self.extra_file, self.db_name, name)
 
         logging.info("mysqldump with command:{} will start...".format(command))
