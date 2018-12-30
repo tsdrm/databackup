@@ -1,9 +1,10 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
-# author:tangs
-# datetime:2018/12/29 23:41
+import unittest
 
-from datetime import datetime
 
-name = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-print(name)
+class MyTestCase(unittest.TestCase):
+    def test_mysqldump(self):
+        pass
+
+
+if __name__ == '__main__':
+    unittest.main()
