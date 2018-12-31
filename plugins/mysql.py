@@ -22,12 +22,11 @@ class Mysql(base.Base):
     password: The password with username to connect to database.
     db_name: Which database you want to connect, it's specified database name.
     extra_file: Mysql configuration file contain mysql user, password and other connect information.
-    path: The path store imported .sql file.
     """
 
     # db = None
 
-    def __init__(self, addr, port, username, password, db_name, extra_file, path, folder, export_name):
+    def __init__(self, addr, port, username, password, db_name, extra_file, folder, export_name):
         base.Base.__init__(self)
         self.addr = addr
         self.port = port
@@ -35,7 +34,6 @@ class Mysql(base.Base):
         self.password = password
         self.db_name = db_name
         self.extra_file = extra_file
-        self.path = path
         self.folder = folder
         self.export_name = export_name
         if export_name == "":
@@ -110,5 +108,7 @@ class Mysql(base.Base):
             logging.info(output)
         except Exception as e:
             logging.error("mysqldump with command:{} crash".format(command), e)
+            return "-1"
 
         logging.info("mysqldump with command:{} successfully".format(command))
+        return name

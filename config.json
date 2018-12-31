@@ -1,0 +1,18 @@
+{
+    "log_file": "/var/log/data_backup.log",
+    "export_folder": "/tmp/data_backup",
+    "users": {
+        "user1": {
+            "export": 1,
+            "mysql": {
+                "extra_file": "/etc/mysql/conf.d/default.conf",
+                "export_name": "",
+                "db_name": "your_db_name"
+            },
+            "file": {
+                "path": "/home/user/wanted_package_folder",
+                "export_name": ""
+            }
+        }
+    }
+}

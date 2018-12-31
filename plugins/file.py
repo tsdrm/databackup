@@ -15,9 +15,9 @@ class File(base.Base):
 
     """
 
-    def __init__(self, source, folder, export_name):
+    def __init__(self, path, folder, export_name):
         base.Base.__init__(self)
-        self.source = source
+        self.path = path
         self.folder = folder
         self.export_name = export_name
         if export_name == "":
@@ -25,7 +25,7 @@ class File(base.Base):
 
     def exec(self):
         name = os.path.join(self.folder, self.export_name)
-        command = "zip -q -r {} {}".format(name, self.source)
+        command = "zip -q -r {} {}".format(name, self.path)
 
         logging.info("file with command:{} will start ...".format(command))
 
